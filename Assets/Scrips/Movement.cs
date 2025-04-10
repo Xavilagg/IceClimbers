@@ -1,20 +1,20 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class Movement : MonoBehaviour
 {
-    Rigidbody rb;
+    Rigidbody2D rb;
     public float movespeed = 0;
     Vector3 direction = Vector3.zero;
     private void Start ()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
     void FixedUpdate()
     {
-        rb.LinearVelocityX = direction.x * movespeed;
+        rb.linearVelocityX = direction.x * movespeed;
     }
-    public void Move_Event (InputAction.CallbackContex context)
+    public void Move_Event (CallbackContext context)
     {
         if(context.performed)
         {
