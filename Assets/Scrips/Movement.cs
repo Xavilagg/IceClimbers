@@ -4,6 +4,10 @@ using static UnityEngine.InputSystem.InputAction;
 public class Movement : MonoBehaviour
 {
     Rigidbody2D rb;
+    [SerializeField] float jumpForce;
+    bool grounded;
+
+    [SerializeField] LayerMask groundedRCLayerMask;
     public float movespeed = 0;
     Vector3 direction = Vector3.zero;
     private void Start ()
@@ -12,7 +16,11 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        
+        //Origen, direccion, distancia,collision filter 
         rb.linearVelocityX = direction.x * movespeed;
+        grounded = (Physics2D.Raycast(transform.position, Vector2.down, 1.05f, groundedRCLayerMask));
+        
     }
     public void Move_Event (CallbackContext context)
     {
@@ -26,6 +34,14 @@ public class Movement : MonoBehaviour
         else
         {
             direction = Vector3.zero;
+        }
+    }
+
+    public void Jump_Event (CallbackContext context)
+    {
+        if(context.performed)
+        {
+            if (grounded) rb.linearVelocityY = jumpForce;
         }
     }
 }
