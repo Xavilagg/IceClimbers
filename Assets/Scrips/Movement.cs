@@ -5,7 +5,7 @@ public class Movement : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float jumpForce;
-    bool grounded;
+    public bool grounded;
 
     [SerializeField] LayerMask groundedRCLayerMask;
     public float movespeed = 0;
