@@ -47,7 +47,7 @@ public class Movement : MonoBehaviour
     {
         if(context.performed)
         {
-            if (grounded) rb.linearVelocityY = jumpForce;
+            if (grounded && !attackController.isAttacking) rb.linearVelocityY = jumpForce;
         }
     }
 }
